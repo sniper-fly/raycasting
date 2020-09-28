@@ -74,13 +74,13 @@ class Player {
 		noStroke();
 		fill("red");
 		circle(this.x, this.y, this.radius);
-		// stroke("red");
-		// line (
-		// 	this.x,
-		// 	this.y,
-		// 	this.x + Math.cos(this.rotationAngle) * 20,
-		// 	this.y + Math.sin(this.rotationAngle) * 20
-		// )
+		stroke("red");
+		line (
+			this.x,
+			this.y,
+			this.x + Math.cos(this.rotationAngle) * 20,
+			this.y + Math.sin(this.rotationAngle) * 20
+		)
 	}
 }
 
@@ -101,7 +101,9 @@ class Ray {
 		var xintercept, yintercept;
 		var xstep, ystep;
 
-		console.log("isRayFacingRight?", this.isRayFacingRight);
+		var foundHorzWallHit = false;
+		var wallHitX = 0;
+		var wallHitY = 0;
 
 		//HORIZOZNTAL RAY-Grid intersection code
 		yintercept = Math.floor(player.y / TILE_SIZE) * TILE_SIZE;
@@ -115,6 +117,29 @@ class Ray {
 		xstep = TILE_SIZE / Math.tan(this.rayAngle);
 		xstep *= (this.isRayFacingLeft && xstep > 0) ? -1 : 1;
 		xstep *= (this.isRayFacingRight && xstep < 0) ? -1 : 1;
+
+		var nextHorzTouchX = xintercept;
+		var nextHorzTouchY = yintercept;
+
+		if (this.isRayFacingUp)
+			nextHorzTouchY--;
+
+		while (nextHorzTouchX >= 0 && nextHorzTouchX <= WINDOW_WIDTH && nextHorzTouchY >= 0 && nextHorzTouchY <= WINDOW_HEIGHT) {
+			if (grid.hasWall(nextHorzTouchX, nextHorzTouchY)) {
+				foundHorzWallHit = true;
+				wallHitX = nextHorzTouchX;
+				wallHitY = nextHorzTouchY;
+
+				stroke("red");
+				line(player.x, player.y, wallHitX, wallHitY);
+
+				break;
+			}
+			else {
+				nextHorzTouchX += xstep;
+				nextHorzTouchY += ystep;
+			}
+		}
 	}
 	render() {
 		stroke("rgba(0, 255, 0, 0.4)");

@@ -18,3 +18,9 @@ hypotenuse 斜辺
 
 arc 円弧
 radius 半径
+
+like it or not		好き嫌いにかかわらず
+suspicion			疑い
+compansate			補償　埋め合わせ
+amend				修正する
+a
