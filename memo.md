@@ -23,4 +23,9 @@ like it or not		好き嫌いにかかわらず
 suspicion			疑い
 compansate			補償　埋め合わせ
 amend				修正する
-a
+coresponding		対応する
+
+denominator			分母
+distorted			いびつな、ゆがめられた
+
+peculiarity			特性

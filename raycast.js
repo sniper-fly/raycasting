@@ -7,8 +7,10 @@ const WINDOW_HEIGHT = MAP_NUM_ROWS * TILE_SIZE;
 
 const FOV_ANGLE = 60 * (Math.PI / 180);
 
-const WALL_STRIP_WIDTH = 1;
+const WALL_STRIP_WIDTH = 3;
 const NUM_RAYS = WINDOW_WIDTH / WALL_STRIP_WIDTH;
+
+const MINIMAP_SCALE_FACTOR = 0.2;
 
 class Map {
     constructor() {
@@ -41,7 +43,12 @@ class Map {
                 var tileColor = this.grid[i][j] == 1 ? "#222" : "#fff";
                 stroke("#222");
                 fill(tileColor);
-                rect(tileX, tileY, TILE_SIZE, TILE_SIZE);
+                rect(
+					MINIMAP_SCALE_FACTOR * tileX,
+					MINIMAP_SCALE_FACTOR * tileY,
+					MINIMAP_SCALE_FACTOR * TILE_SIZE,
+					MINIMAP_SCALE_FACTOR * TILE_SIZE
+				);
             }
         }
     }
@@ -73,7 +80,11 @@ class Player {
 	render() {
 		noStroke();
 		fill("red");
-		circle(this.x, this.y, this.radius);
+		circle(
+			MINIMAP_SCALE_FACTOR * this.x,
+			MINIMAP_SCALE_FACTOR * this.y,
+			MINIMAP_SCALE_FACTOR * this.radius
+		);
 		// stroke("red");
 		// line (
 		// 	this.x,
@@ -186,10 +197,10 @@ class Ray {
 	render() {
 		stroke("rgba(0, 255, 0, 0.4)");
 		line(
-			player.x,
-			player.y,
-			this.wallHitX,
-			this.wallHitY
+			MINIMAP_SCALE_FACTOR * player.x,
+			MINIMAP_SCALE_FACTOR * player.y,
+			MINIMAP_SCALE_FACTOR * this.wallHitX,
+			MINIMAP_SCALE_FACTOR * this.wallHitY
 		);
 	}
 }
@@ -249,6 +260,36 @@ function castAllRays() {
 	}
 }
 
+function render3DProjectedWalls() {
+	for (var i = 0; i < NUM_RAYS; i++) {
+		var ray = rays[i];
+
+		var correctWallDistance = ray.distance * Math.cos(ray.rayAngle - player.rotationAngle);
+
+		var distanceProjectionPlane = (WINDOW_WIDTH / 2) / Math.tan(FOV_ANGLE / 2);
+
+		var wallStripHeight = (TILE_SIZE / correctWallDistance) * distanceProjectionPlane;
+
+		// fill("rgba(255, 255, 255, 1.0)");
+		// fill(255 - correctWallDistance * 0.2,
+		// 	255 - correctWallDistance * 0.2,
+		// 	255 - correctWallDistance * 0.2
+		// );
+		fill(255 - ray.distance * 0.2,
+			255 - ray.distance * 0.2,
+			255 - ray.distance * 0.2
+		);
+		noStroke();
+		rect(
+			i * WALL_STRIP_WIDTH,
+			(WINDOW_HEIGHT / 2) - (wallStripHeight / 2),
+			WALL_STRIP_WIDTH,
+			wallStripHeight
+		);
+	}
+
+}
+
 function distanceBetweenPoints(x1, y1, x2, y2) {
 	return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 }
@@ -263,8 +304,11 @@ function update() {
 }
 
 function draw() {
+	clear("#212121");
 	update();
 	
+	render3DProjectedWalls();
+
 	grid.render();
 	for (ray of rays) {
 		ray.render();
