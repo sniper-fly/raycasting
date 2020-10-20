@@ -1,0 +1,3 @@
+[submodule "raycasting_c/minilibx-linux"]
+	path = raycasting_c/minilibx-linux
+	url = /raycastinc_c/minilibx-linux

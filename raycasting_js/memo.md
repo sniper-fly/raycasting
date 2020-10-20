@@ -25,7 +25,7 @@ compansate			補償　埋め合わせ
 amend				修正する
 coresponding		対応する
 
-denominator			分母
+denominator			分母　
 distorted			いびつな、ゆがめられた
 
 peculiarity			特性
