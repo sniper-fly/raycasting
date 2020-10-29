@@ -8,6 +8,10 @@
 #define X_EVENT_KEY_EXIT		17 //Exit program key code
 
 #define KEY_ESC			65307
+# define KEY_W				119
+# define KEY_A				97
+# define KEY_S				115
+# define KEY_D				100
 
 # define TILE_SIZE 32
 # define ROWS 11
@@ -17,7 +21,8 @@
 
 # define TO_COORD(X, Y) ((int)floor(Y) * WIDTH + (int)floor(X))
 
-
+int g_player_x = 1;
+int g_player_y = 1;
 
 typedef struct	s_img
 {
@@ -122,6 +127,14 @@ int		deal_key(int key_code, t_game *game)
 {
 	if (key_code == KEY_ESC)
 		exit(0);
+	else if (key_code == KEY_W)
+		g_player_y--;
+	else if (key_code == KEY_S)
+		g_player_y++;
+	else if (key_code == KEY_A)
+		g_player_x--;
+	else if (key_code == KEY_D)
+		g_player_x++;
 	return (0);
 }
 
@@ -164,6 +177,7 @@ int		main_loop(t_game *game)
 {
 	draw_rectangles(game);
 	draw_lines(game);
+	draw_rectangle(game, g_player_x, g_player_y);
 
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 
