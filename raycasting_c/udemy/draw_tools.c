@@ -18,7 +18,16 @@ int		g_map[ROWS][COLS] = {
 int		g_is_game_running = FALSE;
 int		g_player_x = 20;
 int		g_player_y = 20;
-int		g_key_flag = FALSE;
+int		g_key_flag = TRUE;
+
+
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
+{
+	game->img.data[y * WIDTH + x] = color;
+	// int		*dst;
+	// dst = game->img.data + (y * game->img.size_l + x * game->img.bpp / (sizeof(int) * 8));
+	// *dst = color;
+}
 
 void	draw_line(t_game *game, double x1, double y1, double x2, double y2)
 {
@@ -60,7 +69,7 @@ void 	draw_lines(t_game *game)
 	draw_line(game, 0, ROWS * TILE_SIZE - 1, WIDTH, ROWS * TILE_SIZE - 1);
 }
 
-void	draw_rectangle(t_game *game, int x, int y)
+void	draw_rectangle(t_game *game, int x, int y, int color)
 {
 	int i;
 	int j;
@@ -73,7 +82,7 @@ void	draw_rectangle(t_game *game, int x, int y)
 		j = 0;
 		while (j < TILE_SIZE)
 		{
-			game->img.data[(y  + i) * WIDTH + x + j] = 0xFFFFFF;
+			game->img.data[(y  + i) * WIDTH + x + j] = color;
 			j++;
 		}
 		i++;
@@ -92,14 +101,16 @@ void	draw_rectangles(t_game *game)
 		while (j < COLS)
 		{
 			if (g_map[i][j] == 1)
-				draw_rectangle(game, j, i);
+				draw_rectangle(game, j, i, 0xffffff);
+			else
+				draw_rectangle(game, j, i, 0x000000);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	render_rectangle(t_game *game, t_rect_info *rect)
+void	render_rectangle(t_game *game, t_rect_info *rect, int color)
 {
 	int	x_end;
 	int y_end;
@@ -113,10 +124,41 @@ void	render_rectangle(t_game *game, t_rect_info *rect)
 		rect->y = y_tmp;
 		while (rect->y < y_end)
 		{
-			my_mlx_pixel_put(game, rect->x, rect->y, rect->color);
+			my_mlx_pixel_put(game, rect->x, rect->y, color);
 			rect->y += 1;
 		}
 		rect->x += 1;
+	}
+}
+
+void	render_line(t_game *game, t_line_info *line, int color)
+{
+	double		a;
+	double		b;
+	t_line_info	lncp;
+	
+	//x1には必ず小さいほう、x2には必ず大きい数がはいる
+	lncp.x1 = (line->x1 <= line->x2) ? line->x1 : line->x2;
+	lncp.x2 = (line->x1 <= line->x2) ? line->x2 : line->x1;
+	if (line->x1 == line->x2)
+	{
+		lncp.y1 = (line->y1 <= line->y2) ? line->y1 : line->y2;
+		lncp.y2 = (line->y1 <= line->y2) ? line->y2 : line->y1;
+		while (lncp.y1 <= lncp.y2)
+		{
+			my_mlx_pixel_put(game, lncp.x1, lncp.y1, color);
+			lncp.y1++;
+		}
+	}
+	else
+	{
+		a = (line->y1 - line->y2) / (line->x1 - line->x2);
+		b = line->y1 - (a * line->x1);
+		while (lncp.x1 <= lncp.x2)
+		{
+			my_mlx_pixel_put(game, lncp.x1, (a * lncp.x1 + b), color);
+			lncp.x1++;
+		}
 	}
 }
 

@@ -73,17 +73,25 @@ typedef struct
 	int		y;
 	int		width;
 	int		height;
-	int		color;
 }				t_rect_info;
 
+typedef struct
+{
+	int		x1;
+	int		y1;
+	int		x2;
+	int		y2;
+}				t_line_info;
 
+
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 void	draw_line
 		(t_game *game, double x1, double y1, double x2, double y2);
 void 	draw_lines(t_game *game);
-void	draw_rectangle(t_game *game, int x, int y);
+void	draw_rectangle(t_game *game, int x, int y, int color);
 void	draw_rectangles(t_game *game);
-void	render_rectangle(t_game *game, t_rect_info *rect);
+void	render_rectangle(t_game *game, t_rect_info *rect, int color);
+void	render_line(t_game *game, t_line_info *line, int color);
 int		deal_key(int key_code, t_game *game);
-void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 
 #endif
