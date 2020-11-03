@@ -1,9 +1,11 @@
 
+SRCS = ${shell find ./srcs/ -type f -name "*.c"}
+LIBMLX = ./minilibx-linux/libmlx.a
 CC = gcc
 CFLAG = -lXext -lX11 -lm
 
 all:
-	$(CC) raycasting.c draw_tools.c ./minilibx-linux/libmlx.a $(CFLAG)
+	$(CC) $(SRCS) $(LIBMLX) $(CFLAG)
 
 run:
 	./a.out

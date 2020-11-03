@@ -33,8 +33,6 @@
 
 extern int		g_map[ROWS][COLS];
 extern int		g_is_game_running;
-extern int		g_player_x;
-extern int		g_player_y;
 extern int		g_key_flag;
 
 struct Player
@@ -48,7 +46,7 @@ struct Player
 	float rotation_angle;
 	float walk_speed;
 	float turn_speed;
-} player;
+}				g_player;
 
 typedef struct	s_img
 {
@@ -77,20 +75,21 @@ typedef struct
 
 typedef struct
 {
-	int		x1;
-	int		y1;
-	int		x2;
-	int		y2;
+	double		x1;
+	double		y1;
+	double		x2;
+	double		y2;
 }				t_line_info;
-
 
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 void	draw_line
 		(t_game *game, double x1, double y1, double x2, double y2);
-void 	draw_lines(t_game *game);
+void	draw_ray
+		(t_game *game, t_line_info *line);
+void	draw_lines(t_game *game);
 void	draw_rectangle(t_game *game, int x, int y, int color);
 void	draw_rectangles(t_game *game);
-void	render_rectangle(t_game *game, t_rect_info *rect, int color);
+void	render_player_rect(t_game *game, t_rect_info *rect, int color);
 void	render_line(t_game *game, t_line_info *line, int color);
 int		deal_key(int key_code, t_game *game);
 
