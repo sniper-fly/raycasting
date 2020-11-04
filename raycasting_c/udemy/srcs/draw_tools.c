@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 10:15:13 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/04 10:25:16 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/04 10:30:46 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,26 @@ void	draw_ray(t_game *game, t_line_info *line)
 
 void	render_player_rect(t_game *game, t_rect_info *rect, int color)
 {
+	int	x_start;
+	int	y_start;
 	int	x_end;
-	int y_end;
-	int y_tmp;
+	int	y_end;
+	int	y_tmp;
 
-	x_end = rect->x + rect->width;
-	y_end = rect->y + rect->height;
-	y_tmp = rect->y;
-	while (rect->x < x_end)
+	x_start = rect->x - (rect->width / 2);
+	x_end = rect->x + (rect->width / 2);
+	y_start = rect->y - (rect->height / 2);
+	y_end = rect->y + (rect->height / 2);
+	y_tmp = y_start;
+	while (x_start < x_end)
 	{
-		rect->y = y_tmp;
-		while (rect->y < y_end)
+		y_start = y_tmp;
+		while (y_start < y_end)
 		{
-			my_mlx_pixel_put(game, rect->x, rect->y, color);
-			rect->y += 1;
+			my_mlx_pixel_put(game, x_start, y_start, color);
+			y_start += 1;
 		}
-		rect->x += 1;
+		x_start += 1;
 	}
 }
 

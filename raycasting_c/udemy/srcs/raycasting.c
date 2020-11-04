@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 10:15:33 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/04 10:15:34 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/04 10:32:37 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ int		main_loop(t_game *game)
 	{
 		//	描画する
 		render(game);
-		mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	}
 	g_key_flag = FALSE;
 	return (0);
