@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 10:15:33 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/05 14:08:10 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/05 14:44:09 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ t_line_info	init_line_info(double x1, double y1, double x2, double y2)
 	return (line_info);
 }
 
-#include <stdio.h>
 void	render_rays(t_game *game)
 {
 	t_line_info line;
@@ -92,12 +91,11 @@ void	render_rays(t_game *game)
 		g_player.y,
 		g_player.x + cos(g_player.rotation_angle) * 30,
 		g_player.y + sin(g_player.rotation_angle) * 30);
-	printf("rotation_angle is %f\n", g_player.rotation_angle);
-	printf("x1 = %f\n", line.x1);
-	printf("y1 = %f\n", line.y1);
-	printf("x2 = %f\n", line.x2);
-	printf("y2 = %f\n", line.y2);
-	// draw_ray(game, &line);
+	draw_ray(game, &line);
+
+	t_rect_info rect;
+	rect = init_rect_info(line.x2, line.y2, 3, 3);
+	render_player_rect(game, &rect, 0x00ff000);
 }
 
 void	setup(void)

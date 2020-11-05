@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 10:15:13 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/05 14:28:24 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/05 14:38:58 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,20 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 
 void	draw_ray(t_game *game, t_line_info *line)
 {
-	double	deltaX;
-	double	deltaY;
+	double	delta_x;
+	double	delta_y;
 	double	step;
 
-	deltaX = line->x2 - line->x1;
-	deltaY = line->y2 - line->y1;
-	step = (fabs(deltaX) > fabs(deltaY)) ? fabs(deltaX) : fabs(deltaY);
-	deltaX /= step;
-	deltaY /= step;
+	delta_x = line->x2 - line->x1;
+	delta_y = line->y2 - line->y1;
+	step = (fabs(delta_x) > fabs(delta_y)) ? fabs(delta_x) : fabs(delta_y);
+	delta_x /= step * 100;
+	delta_y /= step * 100;
 	while (fabs(line->x2 - line->x1) > 0.01 || fabs(line->y2 - line->y1) > 0.01)
 	{
 		game->img.data[TO_COORD(line->x1, line->y1)] = 0xff0000;
-		line->x1 += deltaX;
-		line->y1 += deltaY;
+		line->x1 += delta_x;
+		line->y1 += delta_y;
 	}
 }
 
