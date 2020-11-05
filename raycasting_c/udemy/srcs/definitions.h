@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 10:14:37 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/04 10:23:16 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/05 12:06:29 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@
 # define FALSE 0
 
 # define X_EVENT_KEY_PRESS		2
+# define X_EVENT_KEY_RELEASE	3
 # define X_EVENT_KEY_EXIT		17 //Exit program key code
 
-# define KEY_ESC			65307
-# define KEY_W			119
-# define KEY_A			97
-# define KEY_S			115
-# define KEY_D			100
+# define KEY_ESC				65307
+# define KEY_W					119
+# define KEY_A					97
+# define KEY_S					115
+# define KEY_D					100
+# define KEY_LEFT_ARROW			65361
+# define KEY_RIGHT_ARROW		65363
 
 # define TILE_SIZE 32
 # define ROWS 13
@@ -55,6 +58,7 @@ struct			s_player
 	float	height;
 	int		turn_direction; //-1 for left, +1 for right
 	int		walk_direction; //-1 for back, +1 for front
+	float	side_angle; //-1 for left, +1 for right
 	float	rotation_angle;
 	float	walk_speed;
 	float	turn_speed;
@@ -103,6 +107,8 @@ void			draw_rectangle(t_game *game, int x, int y, int color);
 void			draw_rectangles(t_game *game);
 void			render_player_rect(t_game *game, t_rect_info *rect, int color);
 void			render_line(t_game *game, t_line_info *line, int color);
-int				deal_key(int key_code, t_game *game);
+int				key_pressed(int key_code, t_game *game);
+int				key_released(int key_code, t_game *game);
+int				has_wall_at(int x, int y);
 
 #endif

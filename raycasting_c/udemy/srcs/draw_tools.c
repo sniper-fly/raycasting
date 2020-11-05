@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 10:15:13 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/04 10:30:46 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/05 14:28:24 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,19 +113,3 @@ void	render_player_rect(t_game *game, t_rect_info *rect, int color)
 // 		}
 // 	}
 // }
-
-int		deal_key(int key_code, t_game *game)
-{
-	if (key_code == KEY_ESC)
-		exit(0);
-	else if (key_code == KEY_W)
-		g_player.y -= 10;
-	else if (key_code == KEY_S)
-		g_player.y += 10;
-	else if (key_code == KEY_A)
-		g_player.x -= 10;
-	else if (key_code == KEY_D)
-		g_player.x += 10;
-	g_key_flag = TRUE;
-	return (0);
-}
