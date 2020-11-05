@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:44:19 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/05 14:15:14 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/05 16:40:48 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ int		key_pressed(int key_code, t_game *game)
 
 int		key_released(int key_code, t_game *game)
 {
-	if (key_code == KEY_ESC)
-		exit(0);
-	else if (key_code == KEY_W)
+	if (key_code == KEY_W)
 		g_player.walk_direction = 0;
 	else if (key_code == KEY_S)
 		g_player.walk_direction = 0;

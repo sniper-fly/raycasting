@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 10:15:33 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/05 15:58:27 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/05 16:41:32 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ int		main(void)
 	mlx_loop_hook(game.mlx, &main_loop, &game);
 	mlx_loop(game.mlx);
 	mlx_destroy_image(game.mlx, game.img.img);
+	mlx_destroy_window(game.mlx, game.img.img);
 	return (0);
 }
