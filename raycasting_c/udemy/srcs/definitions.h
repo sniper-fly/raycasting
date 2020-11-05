@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 10:14:37 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/05 16:05:11 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/05 17:07:17 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3
 # define X_EVENT_KEY_EXIT		17 //Exit program key code
+
+# define KEY_PRESS_MASK			1<<0
+# define KEY_RELEASE_MASK		1<<1
+# define STRUCTURE_NOTIFY_MASK	1<<17
 
 # define KEY_ESC				65307
 # define KEY_W					119
@@ -120,6 +124,8 @@ void			render(t_game *game);
 
 int				key_pressed(int key_code, t_game *game);
 int				key_released(int key_code, t_game *game);
+void			close(t_game *game);
+
 int				has_wall_at(int x, int y);
 
 #endif

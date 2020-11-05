@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:44:19 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/05 16:40:48 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/05 17:06:56 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,9 @@ int		key_released(int key_code, t_game *game)
 	else if (key_code == KEY_RIGHT_ARROW)
 		g_player.turn_direction = 0;
 	return (0);
+}
+
+void	close(t_game *game)
+{
+	exit(0);
 }

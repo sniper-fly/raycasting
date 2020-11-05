@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 10:15:33 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/05 16:41:32 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/05 17:04:40 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,9 @@ int		main(void)
 
 	setup(); //initializing put everything global var
 
-	mlx_hook(game.win, X_EVENT_KEY_PRESS, 1, &key_pressed, &game);
-	mlx_hook(game.win, X_EVENT_KEY_RELEASE, 1<<1, &key_released, &game);
+	mlx_hook(game.win, X_EVENT_KEY_PRESS, KEY_PRESS_MASK, &key_pressed, &game);
+	mlx_hook(game.win, X_EVENT_KEY_RELEASE, KEY_RELEASE_MASK, &key_released, &game);
+	mlx_hook(game.win, X_EVENT_KEY_EXIT, STRUCTURE_NOTIFY_MASK, &close, &game);
 	mlx_loop_hook(game.mlx, &main_loop, &game);
 	mlx_loop(game.mlx);
 	mlx_destroy_image(game.mlx, game.img.img);
