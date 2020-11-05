@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 10:14:37 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/05 12:06:29 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/05 16:05:11 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <math.h>
 # include <stdlib.h>
+# include "../minilibx-linux/mlx.h"
 
 # define TRUE 1
 # define FALSE 0
@@ -98,15 +99,25 @@ typedef struct
 }				t_line_info;
 
 void			my_mlx_pixel_put(t_game *game, int x, int y, int color);
-void			draw_line
-				(t_game *game, double x1, double y1, double x2, double y2);
 void			draw_ray
 				(t_game *game, t_line_info *line);
+void			draw_player_rect(t_game *game, t_rect_info *rect, int color);
+
+void			draw_line
+				(t_game *game, double x1, double y1, double x2, double y2);
 void			draw_lines(t_game *game);
 void			draw_rectangle(t_game *game, int x, int y, int color);
 void			draw_rectangles(t_game *game);
-void			render_player_rect(t_game *game, t_rect_info *rect, int color);
-void			render_line(t_game *game, t_line_info *line, int color);
+
+t_rect_info		init_rect_info(int x, int y, int width, int height);
+t_line_info		init_line_info(double x1, double y1, double x2, double y2);
+
+void			render_map(t_game *game);
+void			render_player(t_game *game);
+void			render_rays(t_game *game);
+void			render_map(t_game *game);
+void			render(t_game *game);
+
 int				key_pressed(int key_code, t_game *game);
 int				key_released(int key_code, t_game *game);
 int				has_wall_at(int x, int y);
