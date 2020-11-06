@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 10:15:33 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/05 17:04:40 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/06 12:12:19 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	setup(void)
 
 void	update(void)
 {
-	double		move_step;
-	double		new_player_x;
-	double		new_player_y;
+	float		move_step;
+	float		new_player_x;
+	float		new_player_y;
 
 	g_player.rotation_angle += g_player.turn_direction * g_player.turn_speed;
 	move_step = g_player.walk_direction * g_player.walk_speed;
@@ -93,6 +93,7 @@ int		main(void)
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, KEY_PRESS_MASK, &key_pressed, &game);
 	mlx_hook(game.win, X_EVENT_KEY_RELEASE, KEY_RELEASE_MASK, &key_released, &game);
 	mlx_hook(game.win, X_EVENT_KEY_EXIT, STRUCTURE_NOTIFY_MASK, &close, &game);
+	//focus in イベント（最小化してもう一度画面を戻すとき）が発生したときに再度描画するhookを登録する必要がある. linux vmで要検証。mlx_put_image_to_windowを呼び出して再描画させればよさげ
 	mlx_loop_hook(game.mlx, &main_loop, &game);
 	mlx_loop(game.mlx);
 	mlx_destroy_image(game.mlx, game.img.img);
