@@ -6,13 +6,13 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 18:12:30 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/04 18:16:17 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/06 13:39:06 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "definitions.h"
 
-int		has_wall_at(int x, int y)
+int		has_wall_at(float x, float y)
 {
 	int	map_grid_idx_x;
 	int	map_grid_idx_y;
