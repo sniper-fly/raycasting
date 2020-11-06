@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 10:14:37 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/05 17:07:17 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/06 13:23:51 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define TO_COORD(X, Y) ((int)floor(Y) * WIDTH + (int)floor(X))
 
 # define FOV_ANGLE (60 * (PI / 180))
-# define NUM_RAYS (WIDTH * HEIGHT)
+# define NUM_RAYS WIDTH
 
 extern int		g_map[ROWS][COLS];
 extern int		g_is_game_running;
@@ -68,6 +68,20 @@ struct			s_player
 	float	walk_speed;
 	float	turn_speed;
 }			g_player;
+
+struct			s_ray
+{
+	float	ray_angle;
+	float	wall_hit_x;
+	float	wall_hit_y;
+	float	distance;
+	int		was_hit_vertical;
+	int		is_ray_facing_up;
+	int		is_ray_facing_down;
+	int		is_ray_facing_left;
+	int		is_ray_facing_right;
+	int		wall_hit_content;
+}			g_rays[NUM_RAYS];
 
 typedef struct	s_img
 {
@@ -124,8 +138,8 @@ void			render(t_game *game);
 
 int				key_pressed(int key_code, t_game *game);
 int				key_released(int key_code, t_game *game);
-void			close(t_game *game);
+int				close(t_game *game);
 
-int				has_wall_at(int x, int y);
+int				has_wall_at(float x, float y);
 
 #endif
