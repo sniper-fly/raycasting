@@ -138,9 +138,10 @@ int		deal_key(int key_code, t_game *game)
 	return (0);
 }
 
-int 	close(t_game *game)
+int		close(t_game *game)
 {
 		exit(0);
+		return (0);
 }
 
 void	game_init(t_game *game)
