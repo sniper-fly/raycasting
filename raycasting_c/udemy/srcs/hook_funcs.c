@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:44:19 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/05 17:06:56 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/06 12:10:13 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int		key_pressed(int key_code, t_game *game)
 	else if (key_code == KEY_A)
 	{
 		g_player.walk_direction = 1;
-		g_player.side_angle = PI / 2;
+		g_player.side_angle = (PI / 2) * -1;
 	}
 	else if (key_code == KEY_D)
 	{
 		g_player.walk_direction = 1;
-		g_player.side_angle = (PI / 2) * -1;
+		g_player.side_angle = PI / 2;
 	}
 	else if (key_code == KEY_LEFT_ARROW)
 		g_player.turn_direction = -1;
@@ -61,7 +61,8 @@ int		key_released(int key_code, t_game *game)
 	return (0);
 }
 
-void	close(t_game *game)
+int		close(t_game *game)
 {
 	exit(0);
+	return (0);
 }
