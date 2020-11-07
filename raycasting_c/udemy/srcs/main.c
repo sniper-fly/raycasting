@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 10:15:33 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/06 12:12:19 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/07 12:55:48 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	setup(void)
 	g_player.rotation_angle = PI / 2;
 	g_player.walk_speed = 3;
 	g_player.turn_speed = 10 * (PI / 180);
+	// g_map = ...
+	// g_key_flag = FALSE
 }
 
 void	update(void)

@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 10:14:37 by rnakai            #+#    #+#             */
-/*   Updated: 2020/11/06 13:23:51 by rnakai           ###   ########.fr       */
+/*   Updated: 2020/11/07 12:41:42 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,26 @@ struct			s_ray
 	int		is_ray_facing_right;
 	int		wall_hit_content;
 }			g_rays[NUM_RAYS];
+
+typedef struct	s_cast_ray_var
+{
+	int		is_ray_facing_down;
+	int		is_ray_facing_up;
+	int		is_ray_facing_right;
+	int		is_ray_facing_left;
+	float	xintercept;
+	float	yintercept;
+	float	xstep;
+	float	ystep;
+	int		found_wall_hit;
+	float	wall_hit_x;
+	float	wall_hit_y;
+	int		wall_content;
+	float	next_touch_x;
+	float	next_touch_y;
+	float	x_to_check;
+	float	y_to_check;
+}				t_cast_ray_var;
 
 typedef struct	s_img
 {
